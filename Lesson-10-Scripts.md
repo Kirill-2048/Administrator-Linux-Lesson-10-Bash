@@ -57,3 +57,57 @@ badger@ubuntu:~$ cat loganalysis1
      17 217.118.66.161
      16 95.165.18.146
 
+Задание 2. Получить список запрашиваемых URL (с наибольшим кол-вом запросов) с указанием кол-ва запросов.
+
+Скрипт:
+
+#!/bin/bash
+
+#Путь к входному файлу лога
+
+LOG_FILE="/home/badger/access-4560-644067.log"
+
+#Путь к выходному файлу с результатами
+
+OUTPUT_FILE="/home/badger/loganalysis2"
+
+#Проверяем, существует ли входной файл
+
+if [ ! -f "$LOG_FILE" ]; 
+
+then
+
+    echo "Ошибка: файл лога $LOG_FILE не найден!" >&2
+    
+    exit 1
+    
+fi
+
+#Анализируем лог и получаем топ-10 URL
+
+echo "Топ-10 самых запрашиваемых URL:" > "$OUTPUT_FILE"
+
+awk '{print $7}' "$LOG_FILE" | sort | uniq -c | sort -nr | head -n 10 >> "$OUTPUT_FILE"
+
+echo "Анализ завершен. Результаты сохранены в $OUTPUT_FILE"
+
+Результат вывода:
+
+badger@ubuntu:~$ ./script2.sh
+
+Анализ завершен. Результаты сохранены в /home/badger/loganalysis2
+
+badger@ubuntu:~$ cat ./loganalysis2
+
+Топ-10 самых запрашиваемых URL:
+
+    157 /
+    120 /wp-login.php
+     57 /xmlrpc.php
+     26 /robots.txt
+     12 /favicon.ico
+     11 400
+      9 /wp-includes/js/wp-embed.min.js?ver=5.0.4
+      7 /wp-admin/admin-post.php?page=301bulkoptions
+      7 /1
+      6 /wp-content/uploads/2016/10/robo5.jpg
