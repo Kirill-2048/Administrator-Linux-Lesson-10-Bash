@@ -77,9 +77,9 @@ if [ ! -f "$LOG_FILE" ];
 
 then
 
-    echo "Ошибка: файл лога $LOG_FILE не найден!" >&2
+echo "Ошибка: файл лога $LOG_FILE не найден!" >&2
     
-    exit 1
+exit 1
     
 fi
 
