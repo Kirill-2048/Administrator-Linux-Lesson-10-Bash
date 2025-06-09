@@ -171,3 +171,54 @@ badger@ubuntu:~$ cat loganalysis3
       1 400 /w00tw00t.at.ISC.SANS.DFind:)
       1 400 http://110.249.212.46/testget?q=23333&port=80
       1 400 http://110.249.212.46/testget?q=23333&port=443
+
+
+Задание 4. Вывести список всех кодов HTTP ответа с указанием их кол-ва.
+
+Скрипт:
+#!/bin/bash
+
+#Входной файл
+
+input_file="/home/badger/access-4560-644067.log"
+
+#Выходной файл
+
+output_file="/home/badger/loganalysis4"
+
+#Проверяем, существует ли входной файл
+
+if [ ! -f "$input_file" ]; 
+
+then
+
+echo "Ошибка: файл $input_file не найден!" >&2
+
+exit 1
+
+fi
+
+#Извлекаем коды HTTP ответов, подсчитываем их и сохраняем в выходной файл
+
+awk '{print $9}' "$input_file" | grep -E "^[0-9]{3}$" | sort | uniq -c | sort -nr > "$output_file"
+
+
+echo "Анализ завершен. Результаты сохранены в $output_file"
+
+Вывод:
+
+badger@ubuntu:~$ ./script4.sh
+
+Анализ завершен. Результаты сохранены в /home/badger/loganalysis4
+
+badger@ubuntu:~$ cat loganalysis4
+
+    498 200
+     95 301
+     51 404
+      7 400
+      3 500
+      2 499
+      1 405
+      1 403
+      1 304
