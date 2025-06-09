@@ -15,11 +15,13 @@ LOG_FILE="/home/badger/access-4560-644067.log"
 
 #Проверяем, существует ли файл логов
 
-if [ ! -f "$LOG_FILE" ]; then
+if [ ! -f "$LOG_FILE" ]; 
 
-    echo "Ошибка: файл $LOG_FILE не найден!" >&2
+then
+
+echo "Ошибка: файл $LOG_FILE не найден!" >&2
     
-    exit 1
+exit 1
     
 fi
 
