@@ -111,3 +111,63 @@ badger@ubuntu:~$ cat ./loganalysis2
       7 /wp-admin/admin-post.php?page=301bulkoptions
       7 /1
       6 /wp-content/uploads/2016/10/robo5.jpg
+
+
+Задание 3. Вывести ошибки веб-сервера/приложения.
+
+Скрипт:
+
+#!/bin/bash
+
+#Пути к файлам
+
+LOG_FILE="/home/badger/access-4560-644067.log"
+
+OUTPUT_FILE="/home/badger/loganalysis3"
+
+#Проверяем, существует ли файл лога
+
+if [ ! -f "$LOG_FILE" ]; 
+then
+
+ echo "Ошибка: файл лога $LOG_FILE не найден!" >&2
+ 
+exit 1
+
+fi
+
+#Анализируем ошибки (HTTP-статусы 4xx и 5xx)
+
+echo "Список ошибок сервера/приложения (4xx и 5xx):" > "$OUTPUT_FILE"
+
+awk '$9 ~ /^[45][0-9]{2}$/ {print $9, $7}' "$LOG_FILE" | sort | uniq -c | sort -nr >> "$OUTPUT_FILE"
+
+echo "Анализ завершен. Результаты сохранены в $OUTPUT_FILE"
+
+Вывод:
+
+badger@ubuntu:~$ cat loganalysis3
+
+Список ошибок сервера/приложения (4xx и 5xx):
+
+     31 404 /
+      5 404 /robots.txt
+      5 404 /1
+      4 400 /wp-admin/admin-ajax.php?page=301bulkoptions
+      2 404 /.well-known/security.txt
+      2 404 /sitemap.xml
+      2 404 /admin/config.php
+      1 500 /wp-includes/ID3/comay.php
+      1 500 /wp-content/uploads/2018/08/seo_script.php
+      1 500 /wp-content/plugins/uploadify/includes/check.php
+      1 499 /wp-cron.php?doing_wp_cron=1565803543.6812090873718261718750
+      1 499 /wp-cron.php?doing_wp_cron=1565760219.4257180690765380859375
+      1 405 /
+      1 404 /wp-content/plugins/uploadify/readme.txt
+      1 404 /webdav/
+      1 404 /manager/html
+      1 404 /favicon.ico
+      1 403 /wp-content/themes/llorix-one-lite/fonts/fontawesome-webfont.eot?
+      1 400 /w00tw00t.at.ISC.SANS.DFind:)
+      1 400 http://110.249.212.46/testget?q=23333&port=80
+      1 400 http://110.249.212.46/testget?q=23333&port=443
