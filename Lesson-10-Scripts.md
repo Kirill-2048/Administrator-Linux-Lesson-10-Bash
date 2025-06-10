@@ -15,7 +15,7 @@ LOG_FILE="/home/badger/access-4560-644067.log"
 
 #Проверяем, существует ли файл логов
 
-if [ ! -f "$LOG_FILE" ]; 
+if [ ! -f "$LOG_FILE" ] 
 
 then
 
@@ -73,7 +73,7 @@ OUTPUT_FILE="/home/badger/loganalysis2"
 
 #Проверяем, существует ли входной файл
 
-if [ ! -f "$LOG_FILE" ]; 
+if [ ! -f "$LOG_FILE" ] 
 
 then
 
@@ -127,7 +127,7 @@ OUTPUT_FILE="/home/badger/loganalysis3"
 
 #Проверяем, существует ли файл лога
 
-if [ ! -f "$LOG_FILE" ]; 
+if [ ! -f "$LOG_FILE" ] 
 then
 
  echo "Ошибка: файл лога $LOG_FILE не найден!" >&2
@@ -188,7 +188,7 @@ output_file="/home/badger/loganalysis4"
 
 #Проверяем, существует ли входной файл
 
-if [ ! -f "$input_file" ]; 
+if [ ! -f "$input_file" ] 
 
 then
 
