@@ -61,3 +61,4 @@ echo "Действие 4 выполнено. Результаты сохране
 
 # Действие 5. Отправка содержимого файла loganalysis в теле письма email.
 
+cat /home/badger/loganalysis | mail -s "Анализ log-файла" destination-email@example.com
